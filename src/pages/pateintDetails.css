@@ -1,0 +1,32 @@
+/* main cointainer */
+.mainContainer{
+    align-items: center;
+}
+.paymentStatusBadge{
+    border-style: solid;border-radius: 20px;width:100px;text-align: center;padding: 5px;
+}
+.paymentStatusBadge:hover{
+    border-style: solid;border-radius: 20px;width:100px;text-align: center;padding: 5px;background-color: yellow;;
+}
+/* to add side margins  */
+.patientTableContainer{
+    width: 800px;
+    margin-inline: 250px;
+    margin-top: 30px;
+    border-style: solid;
+    border-color: black;
+    
+}
+/* to set display setting to mediine list */
+.patientPageMedicineList{
+    border-style: solid;
+    border-color: black;
+    background-color: aquamarine;
+   
+}
+.medicineListRow{
+    border-color: black;
+}
+tr,th,td{
+    border-color: black;
+}

@@ -1,0 +1,38 @@
+#root{
+    width: 100%;
+}
+html,body{
+    width:100%;
+}
+
+.mainContainer{
+    width:100%;
+}
+
+.containerFirst {
+  background-image: url(../assets/backgroundMain.jpg);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: auto;
+
+}
+
+.welcomeTHMST{
+    border-style: dashed;
+    width: 600px ;
+}
+.receptionTableContainer{
+    text-align: center;
+
+}
+.receptionContainer{
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.receptionPatientTable{
+    width: 800px ;
+    border-style: solid;
+    border-color: black;
+   margin-left: 100px;
+}

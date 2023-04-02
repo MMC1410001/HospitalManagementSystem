@@ -1,0 +1,23 @@
+.accountantTableContainer{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.patientDetailsAccountant{
+    width: 800px;
+}
+.patientDetailsAccountantTable{
+    background-color:azure;
+    border-style: solid;
+    border-color: black;
+    margin-left: 40px;
+}
+/* charges table patient details accountant */
+.chargesTable{
+    border-style: solid;
+    border-color: black;
+    margin-left: 40px;
+}
+tr,td,th{
+    border-style: solid;
+    border-color: black;
+}

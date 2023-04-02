@@ -1,0 +1,33 @@
+.flex-container{
+    width: 900px;
+    height: 100%;
+    background-color: aquamarine;
+    display: flex;
+}
+.flex-container>div{
+    width: auto;
+    height: 100px;
+    background-color: aquamarine;
+    margin: 100px;
+    border-style: solid;
+    border-color: black;
+}
+span {
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    margin: 6px;
+    background-color: #555;
+  }
+  .Span {
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    margin: 6px;
+    background-color: #555;
+  }
+  #table{
+      border-style: solid;
+      border-color: black;
+      border-radius: "25px";
+  }

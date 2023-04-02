@@ -1,0 +1,14 @@
+.doctorPatientList{
+    width: 900px;
+    align-items: center;
+    margin-left: 50px;
+    background-color: aquamarine;
+    border-color: black;
+    font-family: 'Times New Roman', Times, serif;
+}
+.medicineList{
+    margin-left: 100px;
+    border-style: double;
+    background-color:yellowgreen;
+    font-family: 'Times New Roman', Times, serif;
+}

@@ -1,0 +1,128 @@
+-- CDAC FINAL YEAR PROJECT PMS 
+-- Project details database
+
+create database hospital_management;
+use hospital_management;
+
+
+CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(45) DEFAULT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` varchar(1000) DEFAULT NULL,
+  `cell_no` varchar(45) DEFAULT NULL,
+  `role` varchar(45) DEFAULT NULL,
+  `security_question` varchar(100) DEFAULT NULL,
+  `security_answer` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO `users` VALUES (96,'Mayur','Chaudhary','mayurchaudhary1410001@gmail.com','1234','+919993031484','admin','my pet name','raju'),(97,'Chetan','Shelke','chetans@gmail.com','1234','+919993031484','reception','my pet name','rocky'),(110,'Tushar','Kale','tukale@gmail.com','1234','+91 9993031484','doctor','my pet name','doraemon'),(128,'Lokesh','Bhaskar','lokbhaskar8894@gmail.com','1234','+919993031484','patient','my pet name','myau'),(132,'Shilpa','Biradar','sbiradar@gmail.com','1234','+91 9993031484','accountant','my pet name','popat'),(136,'Rajesh','Ghorpade','rghorpade@gmail.com','1234','+919892578866','patient','my pet name','rahul'),(141,'Ramesh','Pawar','rpawar@gmail.com','1234','+919993031484','patient','my pet name','tom'),(143,'Vishakha','Deole','videole@gmail.com','1234','+919993031484','patient','my pet name','dolu'),(145,'Suresh','Bhosale','sbhoasale@gmail.com','1234','+919993031484','doctor','my pet name','paro');
+
+
+CREATE TABLE `employees` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `hire_date` date DEFAULT NULL,
+  `salary` double DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_idx` (`user_id`),
+  CONSTRAINT `id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ;
+
+INSERT INTO `employees` VALUES (92,96,'1995-12-23','2021-12-11',1000000),(93,97,'1998-12-24','2021-12-25',15000),(95,110,'1987-01-13','2018-01-21',86997),(108,132,'1975-01-20','1995-01-21',250000),(112,145,NULL,'2022-01-12',95997);
+
+
+CREATE TABLE `doctors` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `emp_id` int DEFAULT NULL,
+  `charges` double DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `doctor_emp_id_idx` (`emp_id`),
+  CONSTRAINT `doctor_emp_id` FOREIGN KEY (`emp_id`) REFERENCES `employees` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ;
+
+INSERT INTO `doctors` VALUES (30,95,8698),(40,112,1498);
+
+
+CREATE TABLE `wards` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `type` varchar(45) DEFAULT NULL,
+  `charges` double DEFAULT NULL,
+  `availability` double DEFAULT NULL,
+  `max_capacity` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ;
+
+INSERT INTO `wards` VALUES (19,'ICU',2800,28,40),(38,'AC',1200,5,40),(39,'General',870,10,45);
+
+
+CREATE TABLE `patients` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `ward_id` int DEFAULT NULL,
+  `doctor_id` int DEFAULT NULL,
+  `date_of_admission` date DEFAULT NULL,
+  `blood_group` varchar(45) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `prescription` varchar(2000) DEFAULT NULL,
+  `bed_alloted` int DEFAULT NULL,
+  `payment_status` varchar(45) DEFAULT NULL,
+  `patient_problem` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_idx` (`user_id`),
+  KEY `pat_ward_id_idx` (`ward_id`),
+  KEY `pat_doctor_id_idx` (`doctor_id`),
+  CONSTRAINT `pat_doctor_id` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `pat_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `pat_ward_id` FOREIGN KEY (`ward_id`) REFERENCES `wards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ;
+
+INSERT INTO `patients` VALUES (44,141,39,30,'2022-01-12','O-',NULL,'26/1/2022->take xray and come on 28/1/2022 10.00am',11,'pending','high fever'),(46,143,38,30,'2022-01-13','AB+',NULL,'deep cut to hands during machine operating',19,'pending','severe bleeding');
+
+
+CREATE TABLE `medicines` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ;
+
+INSERT INTO `medicines` VALUES (11,'Paclitaxel',50),(13,'Palifermin',200),(14,'Palonosetron hydrochloride',110),(15,'Daraprim',1200);
+
+
+CREATE TABLE `medicines_assigned` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `pat_id` int DEFAULT NULL,
+  `medicine_id` int DEFAULT NULL,
+  `prescription` varchar(500) DEFAULT NULL,
+  `medicine_qty` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `medicine_id_idx` (`medicine_id`),
+  KEY `medicine_pat_id` (`pat_id`),
+  CONSTRAINT `medicine_id` FOREIGN KEY (`medicine_id`) REFERENCES `medicines` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `medicine_pat_id` FOREIGN KEY (`pat_id`) REFERENCES `patients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ;
+
+
+CREATE TABLE `doctor_visits` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `pat_id` int DEFAULT NULL,
+  `doctor_id` int DEFAULT NULL,
+  `visits` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `doctot_visits_doctor_id_idx` (`doctor_id`),
+  KEY `doctor_visit_pat_id` (`pat_id`),
+  CONSTRAINT `doctor_visit_pat_id` FOREIGN KEY (`pat_id`) REFERENCES `patients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `doctot_visits_doctor_id` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ;
+
+INSERT INTO `doctor_visits` VALUES (15,46,40,4),(16,46,30,3);
+
+
+drop database hospital_management;
+
+
+
